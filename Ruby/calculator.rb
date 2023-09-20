@@ -14,12 +14,40 @@ operations = [
   '4. Division'
 ]
 
+def print_menu(menu)
+  max_length = menu.map { |op| op.length }.max + 4
+  horizontal_line = '─' * (max_length)
+
+  puts "\n┌" + horizontal_line + '┐'
+
+  menu.each do |operation|
+    padding = max_length - operation.length - 2
+    menu_line = "|  #{operation}#{' ' * padding}|"
+    puts menu_line
+  end
+
+  puts '└' + horizontal_line + '┘'
+end
+
+def print_result(results)
+  results_str = results.to_s
+  max_length = results_str.length + 4
+
+  horizontal_line = '─' * (max_length)
+  puts "\n┌" + horizontal_line + '┐'
+  puts "|  #{results}  |"
+  puts '└' + horizontal_line + '┘'
+end
+
 loop do
 
   puts 'Simple Calculator Application'
-  puts "\n#{operations}"
+
+  print_menu(operations)
+
   print "\nSelect a operation: "
   input = gets.chomp
+  clear_screen
 
   if input.match?(/\A\d+\z/)
     operation = input.to_i
@@ -42,7 +70,7 @@ loop do
           first_value = first_value.to_f
           break
         else
-          puts 'Invalid input! Please enter a valid number.'
+          puts "\nInvalid input! Please enter a valid number."
         end
       end
 
@@ -54,26 +82,27 @@ loop do
           second_value = second_value.to_f
           break
         else
-          puts 'Invalid input! Please enter a valid number.'
+          puts "\nInvalid input! Please enter a valid number."
         end
       end
 
       case operation
       when 1
-        print "\n#{first_value} + #{second_value} = "
-        puts first_value + second_value
+        result = "#{first_value} + #{second_value} = #{first_value + second_value}"
+        print_result(result)
       when 2
-        print "\n#{first_value} - #{second_value} = "
-        puts first_value - second_value
+        result = "#{first_value} - #{second_value} = #{first_value - second_value}"
+        print_result(result)
       when 3
-        print "\n#{first_value} * #{second_value} = "
-        puts first_value * second_value
+        result = "#{first_value} * #{second_value} = #{first_value * second_value}"
+        print_result(result)
       when 4
         if second_value.zero?
-          puts "\nDivision by zero is not allowed."
+          result = "Division by zero is not allowed."
+          print_result(result)
         else
-          print "\n#{first_value} / #{second_value} = "
-          puts first_value / second_value
+          result = "#{first_value} / #{second_value} = #{first_value / second_value}"
+          print_result(result)
         end
       end
 
