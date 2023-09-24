@@ -1,3 +1,5 @@
+require 'complex'
+
 def clear_screen
   if RUBY_PLATFORM =~ /win32|win64|\.NET|windows|cygwin|mingw32/i
     system('cls')
@@ -11,7 +13,8 @@ operations = [
   '1. Addition',
   '2. Subtraction',
   '3. Multiplication',
-  '4. Division'
+  '4. Division',
+  '5. Square'
 ]
 
 def print_menu(menu)
@@ -52,7 +55,7 @@ loop do
   if input.match?(/\A\d+\z/)
     operation = input.to_i
 
-    if (0..4).include?(operation)
+    if (0..5).include?(operation)
       if operation == 0
         puts "\nSee you!"
       break
@@ -62,27 +65,41 @@ loop do
 
       valid_number_regex = /\A\d+(\.\d+)?\z/
 
-      while true
-        print "\nInsert the first value: "
-        first_value = gets.chomp
+      if operation == 5
+        while true
+          print "\nInsert the first value: "
+          first_value = gets.chomp
 
-        if first_value.match?(valid_number_regex)
-          first_value = first_value.to_f
-          break
-        else
-          puts "\nInvalid input! Please enter a valid number."
+          if first_value.match?(valid_number_regex)
+            first_value = first_value.to_f
+            break
+          else
+            puts "\nInvalid input! Please enter a valid number."
+          end
         end
-      end
+      else
+        while true
+          print "\nInsert the first value: "
+          first_value = gets.chomp
 
-      while true
-        print "\nInsert the second value: "
-        second_value = gets.chomp
+          if first_value.match?(valid_number_regex)
+            first_value = first_value.to_f
+            break
+          else
+            puts "\nInvalid input! Please enter a valid number."
+          end
+        end
 
-        if second_value.match?(valid_number_regex)
-          second_value = second_value.to_f
-          break
-        else
-          puts "\nInvalid input! Please enter a valid number."
+        while true
+          print "\nInsert the second value: "
+          second_value = gets.chomp
+
+          if second_value.match?(valid_number_regex)
+            second_value = second_value.to_f
+            break
+          else
+            puts "\nInvalid input! Please enter a valid number."
+          end
         end
       end
 
@@ -104,6 +121,9 @@ loop do
           result = "#{first_value} / #{second_value} = #{first_value / second_value}"
           print_result(result)
         end
+      when 5
+        result = Math.sqrt(first_value)
+        print_result(result)
       end
 
       print "\nPress Enter to continue..."
