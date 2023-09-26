@@ -1,12 +1,13 @@
 import os
-
+import math
 
 operations = (
     '0. Exit',
     '1. Addition',
     '2. Subtraction',
     '3. Multiplication',
-    '4. Division'
+    '4. Division',
+    '5. Square Root'
 )
 
 
@@ -36,7 +37,7 @@ while True:
     try:
         operation = int(operation)
     except ValueError:
-        print('\nInvalid operation! Please enter a number between 0 and 4.')
+        print('\nInvalid operation! Please enter a number between 0 and 5.')
         input('\nPress Enter to continue... ')
         os.system('clear')
         continue
@@ -44,7 +45,25 @@ while True:
     if operation == 0:
         print('\nSee you!')
         break
-    elif 1 <= operation <= 4:
+    elif operation == 5:
+        while True:
+            print(f"\n{operations[operation]}")
+            first_value = input('\nFirst value: ')
+
+            try:
+                first_value = float(first_value)
+                break
+            except ValueError:
+                print('\nInvalid input! Please enter a valid number.')
+
+        sqrt_operation = math.sqrt(first_value)
+        result = f"√{first_value} = {sqrt_operation}"
+        print_result(result)
+
+        input('\nPress Enter to continue... ')
+        os.system('clear')
+        continue
+    if 1 <= operation <= 4:
         while True:
             print(f"\n{operations[operation]}")
             first_value = input('\nFirst value: ')
@@ -69,22 +88,22 @@ while True:
             result = f"{first_value} + {second_value} = {sum_operation}"
             print_result(result)
         elif operation == 2:
-            sum_operation = first_value - second_value
-            result = f"{first_value} - {second_value} = {sum_operation}"
+            subtract_operation = first_value - second_value
+            result = f"{first_value} - {second_value} = {subtract_operation}"
             print_result(result)
         elif operation == 3:
-            sum_operation = first_value * second_value
-            result = f"{first_value} * {second_value} = {sum_operation}"
+            product_operation = first_value * second_value
+            result = f"{first_value} * {second_value} = {product_operation}"
             print_result(result)
         elif operation == 4:
             if second_value != 0:
-                sum_operation = first_value / second_value
-                result = f"{first_value} / {second_value} = {sum_operation}"
+                divide_operation = first_value / second_value
+                result = f"{first_value} / {second_value} = {divide_operation}"
             else:
                 result = 'Division by zero is not allowed.'
             print_result(result)
     else:
-        print('\nInvalid operation! Please enter a number between 0 and 4.')
+        print('\nInvalid operation! Please enter a number between 0 and 5.')
 
     input('\nPress Enter to continue... ')
     os.system('clear')
