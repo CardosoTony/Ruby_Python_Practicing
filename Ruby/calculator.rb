@@ -122,7 +122,7 @@ loop do
           print_result(result)
         end
       when 5
-        result = Math.sqrt(first_value)
+        result = "√#{first_value} = #{Math.sqrt(first_value)}"
         print_result(result)
       end
 
@@ -130,7 +130,7 @@ loop do
       gets.chomp
       clear_screen
     else
-      puts "\nInvalid operation! Please enter a number between 0 and 4."
+      puts "\nInvalid operation! Please enter a number between 0 and 5."
       print "\nPress Enter to continue..."
       gets.chomp
       clear_screen
